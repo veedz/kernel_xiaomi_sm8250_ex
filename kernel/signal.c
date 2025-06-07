@@ -2034,8 +2034,8 @@ static inline bool may_ptrace_stop(void)
  * If we actually decide not to stop at all because the tracer
  * is gone, we keep current->exit_code unless clear_code.
  */
-static void ptrace_stop(int exit_code, int why, int clear_code, 
-	unsigned long message, siginfo_t *info)
+static void ptrace_stop(int exit_code, int why, int clear_code,
+			unsigned long message, siginfo_t *info)
 	__releases(&current->sighand->siglock)
 	__acquires(&current->sighand->siglock)
 {
