@@ -336,7 +336,9 @@ int kgsl_pool_alloc_page(int *page_size, struct page **pages,
 	}
 
 done:
-	kgsl_zero_page(page, order, dev);
+	if (n0kz_data.n0kz_kgsl_skip_zeroing == 0)
+    	kgsl_zero_page(page, order, dev);
+
 	for (j = 0; j < (*page_size >> PAGE_SHIFT); j++) {
 		p = nth_page(page, j);
 		pages[pcount] = p;

@@ -4,6 +4,12 @@
 
 menu "Misc devices"
 
+config N0KZ_SIGNATURE
+    tristate "Signature N0KZ kernel build"
+    default n
+    help
+      Enable this to build the N0KZ kernel signature attributes module.
+
 config SPI_XIAOMI_TP
         bool
         depends on SPI
