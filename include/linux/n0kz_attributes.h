@@ -8,7 +8,7 @@
 #include <linux/sysfs.h>
 
 struct n0kz_attributes {
-    int n0kz_kgsl_skip_zeroing;
+    int kgsl_skip_zeroing;
 };
 
 extern struct n0kz_attributes n0kz_data;
