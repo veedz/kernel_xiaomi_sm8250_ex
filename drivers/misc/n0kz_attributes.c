@@ -24,10 +24,10 @@ static ssize_t name##_store(struct kobject *kobj, struct kobj_attribute *attr, c
 } \
 static struct kobj_attribute name##_attr = __ATTR(name, 0644, name##_show, name##_store);
 
-N0KZ_ATTR_RW(n0kz_kgsl_skip_zeroing);
+N0KZ_ATTR_RW(kgsl_skip_zeroing);
 
 static struct attribute *n0kz_attrs[] = {
-    &n0kz_kgsl_skip_zeroing_attr.attr,
+    &kgsl_skip_zeroing_attr.attr,
     NULL
 };
 
