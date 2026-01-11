@@ -74,7 +74,7 @@ jobs:
 
           - name: "KernelSU-Next with SuSFS (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-2.0.0"
+            KERNEL_TREE_BRANCH: "susfs-2.0.0-test"
             KERNELSU_NAME: "KSUN"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/Impqxr/KernelSU-Next/refs/heads/legacy-susfs/kernel/setup.sh"
             KERNELSU_SETUP_BRANCH: "legacy-susfs"
@@ -82,7 +82,7 @@ jobs:
 
           - name: "KernelSU-Next with SuSFS + BPF (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-2.0.0"
+            KERNEL_TREE_BRANCH: "susfs-2.0.0-test"
             KERNELSU_NAME: "KSUN"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/Impqxr/KernelSU-Next/refs/heads/legacy-susfs/kernel/setup.sh"
             KERNELSU_SETUP_BRANCH: "legacy-susfs"
@@ -98,7 +98,7 @@ jobs:
 
           - name: "Rissu's KernelSU Only + BPF (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-2.0.0"
+            KERNEL_TREE_BRANCH: "susfs-2.0.0-test"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh"
             KERNELSU_NAME: "RKSU"
             KERNELSU_SETUP_BRANCH: "main"
@@ -106,7 +106,7 @@ jobs:
 
           - name: "Rissu's KernelSU with SuSFS (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-2.0.0"
+            KERNEL_TREE_BRANCH: "susfs-2.0.0-test"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh"
             KERNELSU_NAME: "RKSU"
             KERNELSU_SETUP_BRANCH: "susfs-rksu-master"
@@ -114,7 +114,7 @@ jobs:
 
           - name: "Rissu's KernelSU with SuSFS + BPF (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-2.0.0"
+            KERNEL_TREE_BRANCH: "susfs-2.0.0-test"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh"
             KERNELSU_NAME: "RKSU"
             KERNELSU_SETUP_BRANCH: "susfs-rksu-master"
