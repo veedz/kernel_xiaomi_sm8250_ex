@@ -148,7 +148,6 @@ jobs:
             FINAL_ZIP_NAME="${FINAL_ZIP_NAME}-${{ matrix.config.KERNELSU_NAME }}-${{ steps.build.outputs.KSU_VERSION }}"
             case "${{ matrix.config.KERNELSU_NAME }}" in
               "RKSU") FINAL_DISPLAY_NAME="${FINAL_DISPLAY_NAME} : Rissu's KernelSU ${{ steps.build.outputs.KSU_VERSION }}" ;;
-              *) FINAL_DISPLAY_NAME="${FINAL_DISPLAY_NAME} : ${{ matrix.config.KERNELSU_NAME }} ${{ steps.build.outputs.KSU_VERSION }}" ;;
             esac
           fi
           if [ -n "${{ steps.build.outputs.SUSFS_VERSION }}" ]; then
