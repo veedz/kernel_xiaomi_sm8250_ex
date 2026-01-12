@@ -6,7 +6,7 @@
 #include <linux/n0kz_attributes.h>
 
 struct n0kz_attributes n0kz_data = {
-    .n0kz_kgsl_skip_zeroing = 0,
+    .kgsl_skip_zeroing = 0,
 };
 
 #define N0KZ_ATTR_RW(name) \
