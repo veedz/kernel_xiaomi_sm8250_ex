@@ -9,6 +9,7 @@
 
 struct n0kz_attributes {
     int kgsl_skip_zeroing;
+    int avoid_dirty_pte;
 };
 
 extern struct n0kz_attributes n0kz_data;
