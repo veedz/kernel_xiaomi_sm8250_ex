@@ -141,13 +141,8 @@ jobs:
         working-directory: ${{ steps.workspace.outputs.kernel_folder }}/out/arch/arm64/boot/
         run: |
           set -e
-          FINAL_ZIP_NAME="Orion-${{ matrix.config.KERNEL_DEVICE_CONFIG }}-${{ inputs.release_tag }}"
-          FINAL_DISPLAY_NAME="Orion ${{ matrix.config.KERNEL_DEVICE_CONFIG }}"
-
-          if [[ "${{ matrix.config.KERNEL_TREE_BRANCH }}" == *bpf* ]]; then
-            FINAL_ZIP_NAME="${FINAL_ZIP_NAME}-BPF"
-            FINAL_DISPLAY_NAME="${FINAL_DISPLAY_NAME} (BPF)"
-          fi
+          FINAL_ZIP_NAME="Onion-${{ matrix.config.KERNEL_DEVICE_CONFIG }}-${{ inputs.release_tag }}"
+          FINAL_DISPLAY_NAME="Onion ${{ matrix.config.KERNEL_DEVICE_CONFIGtrue
 
           if [ -n "${{ steps.build.outputs.KSU_VERSION }}" ]; then
             FINAL_ZIP_NAME="${FINAL_ZIP_NAME}-${{ matrix.config.KERNELSU_NAME }}-${{ steps.build.outputs.KSU_VERSION }}"
