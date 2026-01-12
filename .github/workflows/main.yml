@@ -17,7 +17,7 @@ permissions:
 
 env:
   CLANG_DOWNLOAD_URL: "https://github.com/Impqxr/aosp_clang_ci/releases/download/13289611/clang-13289611-linux-x86.tar.xz"
-  KERNEL_TREE_URL: "https://github.com/veedz/kernel_xiaomi_sm8250"
+  KERNEL_TREE_URL: "https://github.com/veedz/kernel_xiaomi_sm8250_ex"
   ANYKERNEL_URL_MUNCH: "https://github.com/veedz/AKmunch"
   ANYKERNEL_BRANCH_MUNCH: "main"
 
