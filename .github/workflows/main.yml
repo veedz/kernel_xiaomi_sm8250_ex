@@ -9,7 +9,7 @@ on:
         type: string
       changelog:
         description: "Changelog for the release"
-        required: true
+        required: false
         type: string
 
 permissions:
@@ -141,8 +141,8 @@ jobs:
         working-directory: ${{ steps.workspace.outputs.kernel_folder }}/out/arch/arm64/boot/
         run: |
           set -e
-          FINAL_ZIP_NAME="Onion-${{ matrix.config.KERNEL_DEVICE_CONFIG }}-${{ inputs.release_tag }}"
-          FINAL_DISPLAY_NAME="Onion ${{ matrix.config.KERNEL_DEVICE_CONFIG }}"
+          FINAL_ZIP_NAME="‎Morphite-${{ matrix.config.KERNEL_DEVICE_CONFIG }}-${{ inputs.release_tag }}"
+          FINAL_DISPLAY_NAME="‎Morphite ${{ matrix.config.KERNEL_DEVICE_CONFIG }}"
 
           if [ -n "${{ steps.build.outputs.KSU_VERSION }}" ]; then
             FINAL_ZIP_NAME="${FINAL_ZIP_NAME}-${{ matrix.config.KERNELSU_NAME }}-${{ steps.build.outputs.KSU_VERSION }}"
