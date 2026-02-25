@@ -12,7 +12,7 @@ static int n0kz_blocked_cnt;
 struct n0kz_attributes n0kz_data = {
 	.kgsl_skip_zeroing = 0,
 	.avoid_dirty_pte = 0,
-	.bg_blocklist = "com.shopee.id,com.lazada.android,com.tokopedia.tkpd",
+	.bg_blocklist = "com.shopee.id,com.lazada.android,com.tokopedia.tkpd,com.telkomsel.telkomselcm,com.facebook.katana,com.facebook.lite,com.spaceship.screen.textcopy",
 };
 
 bool n0kz_comm_blocked(const char *comm)
