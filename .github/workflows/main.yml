@@ -76,7 +76,7 @@ jobs:
           # *-* Munch *-*
           - name: "KernelSU-Next with SuSFS (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-v2.0.0-test"
+            KERNEL_TREE_BRANCH: "susfs-v2.0.0-test-uv"
             KERNELSU_NAME: "KSUN"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/Impqxr/KernelSU-Next/refs/heads/legacy-susfs/kernel/setup.sh"
             KERNELSU_SETUP_BRANCH: "legacy-susfs"
@@ -84,7 +84,7 @@ jobs:
 
           - name: "Rissu's KernelSU with SuSFS (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "susfs-v2.0.0-test"
+            KERNEL_TREE_BRANCH: "susfs-v2.0.0-test-uv"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh"
             KERNELSU_NAME: "RKSU"
             KERNELSU_SETUP_BRANCH: "susfs-rksu-master"
