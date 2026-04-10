@@ -189,22 +189,10 @@ static const u32 bbr_probe_rtt_win_ms = 5000;
 /* Proportion of cwnd to estimated BDP in PROBE_RTT, in units of BBR_UNIT: */
 static const u32 bbr_probe_rtt_cwnd_gain = BBR_UNIT * 1 / 2;
 
-/* Use min_rtt to help adapt TSO burst size, with smaller min_rtt resulting
- * in bigger TSO bursts. We cut the RTT-based allowance in half
- * for every 2^9 usec (aka 512 us) of RTT, so that the RTT-based allowance
- * is below 1500 bytes after 6 * ~500 usec = 3ms.
- */
-static const u32 bbr_tso_rtt_shift = 9;
+/* Pace at ~1% below estimated bw, on average, to reduce queue at bottleneck. */
+static const int bbr_pacing_marging_percent = 1;
 
-/* Pace at ~1% below estimated bw, on average, to reduce queue at bottleneck.
- * In order to help drive the network toward lower queues and low latency while
- * maintaining high utilization, the average pacing rate aims to be slightly
- * lower than the estimated bandwidth. This is an important aspect of the
- * design.
- */
-static const int bbr_pacing_margin_percent = 1;
-
-/* We use a startup_pacing_gain of 4*ln(2) because it's the smallest value
+/* We use a high_gain value of 2/ln(2) because it's the smallest pacing gain
  * that will allow a smoothly increasing pacing rate that will double each RTT
  * and send the same number of packets per RTT that an un-paced, slow-starting
  * Reno or CUBIC flow would:
@@ -414,9 +402,17 @@ static u64 bbr_rate_bytes_per_sec(struct sock *sk, u64 rate, int gain,
 	rate *= mss;
 	rate *= gain;
 	rate >>= BBR_SCALE;
-	rate *= USEC_PER_SEC / 100 * (100 - margin);
-	rate >>= BW_SCALE;
-	rate = max(rate, 1ULL);
+	rate *= USEC_PER_SEC / 100 * (100 - bbr_pacing_marging_percent);
+	return rate >> BW_SCALE;
+}
+
+/* Convert a BBR bw and gain factor to a pacing rate in bytes per second. */
+static unsigned long bbr_bw_to_pacing_rate(struct sock *sk, u32 bw, int gain)
+{
+	u64 rate = bw;
+
+	rate = bbr_rate_bytes_per_sec(sk, rate, gain);
+	rate = min_t(u64, rate, sk->sk_max_pacing_rate);
 	return rate;
 }
 
@@ -511,7 +507,14 @@ static u32 bbr_tso_segs_goal(struct sock *sk)
 {
 	struct tcp_sock *tp = tcp_sk(sk);
 
-	return  bbr_tso_segs_generic(sk, tp->mss_cache, GSO_LEGACY_MAX_SIZE);
+	/* Sort of tcp_tso_autosize() but ignoring
+	 * driver provided sk_gso_max_size.
+	 */
+	bytes = min_t(unsigned long, sk->sk_pacing_rate >> sk->sk_pacing_shift,
+		      GSO_MAX_SIZE - 1 - MAX_TCP_HEADER);
+	segs = max_t(u32, bytes / tp->mss_cache, bbr_min_tso_segs(sk));
+
+	return min(segs, 0x7FU);
 }
 
 /* Save "last known good" cwnd so we can restore it after losses or PROBE_RTT */
