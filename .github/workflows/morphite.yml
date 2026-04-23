@@ -22,8 +22,8 @@ permissions:
 
 env:
   CLANG_DOWNLOAD_URL: "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz"
-  KERNEL_TREE_URL: "https://github.com/veedz/kernel_xiaomi_sm8250_ex"
-  ANYKERNEL_URL_MUNCH: "https://github.com/veedz/AKmunch"
+  KERNEL_TREE_URL: "https://github.com/nunkki/kernel_xiaomi_sm8250_Morphite"
+  ANYKERNEL_URL_MUNCH: "https://github.com/nunkki/AKmunch"
   ANYKERNEL_BRANCH_MUNCH: "main"
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   
@@ -73,7 +73,7 @@ jobs:
           # *-* Munch *-*
           - name: "KernelSU-Next Only + BPF (munch)"
             KERNEL_DEVICE_CONFIG: "munch"
-            KERNEL_TREE_BRANCH: "base"
+            KERNEL_TREE_BRANCH: "base-bpf-test"
             KERNELSU_NAME: "KSUN"
             KERNELSU_SETUP_URL: "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/dev/kernel/setup.sh"
             KERNELSU_SETUP_BRANCH: "legacy"
@@ -258,25 +258,19 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          gh release create "${{ inputs.release_tag }}" \
-             --title "Kernel build for ${{ inputs.release_tag }}" \
-             --notes "${{ inputs.changelog }}"
-
-          echo "=== LIST FILES ==="
-          find artifacts -type f
+            gh release create "${{ inputs.release_tag }}" \
+               --title "Kernel build for ${{ inputs.release_tag }}" \
+               --notes "${{ inputs.changelog }}"
           
-          for dir in artifacts/*; do
-            if [ -d "$dir" ]; then
-               zip_path=$(find "$dir" -name "*.zip" | head -n1)
+            zip_path=$(find artifacts -name "*.zip" | head -n1)
 
             if [ -z "$zip_path" ]; then
-               echo "ZIP not found in $dir"
-            continue
+               echo "ZIP not found"
+              continue
             fi
             
-            display_name=$(cat "$dir/display_name.txt")
-            echo "Uploading $zip_path as $display_name"
-            gh release upload "${{ inputs.release_tag }}" \
-            "$zip_path#$display_name"
-            fi
+              display_name=$(cat artifacts/display_name.txt)
+              echo "Uploading $zip_path as $display_name"
+              gh release upload "${{ inputs.release_tag }}" \
+              "$zip_path#$display_name"
             done
